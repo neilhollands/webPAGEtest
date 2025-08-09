@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Landing Page</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-start:#0f172a;
+      --bg-end:#0b1223;
+      --accent-1:#6ee7b7; /* mint */
+      --accent-2:#60a5fa; /* sky */
+      --glass: rgba(255,255,255,0.06);
+      --card: rgba(255,255,255,0.03);
+      --max-width:1100px;
+    }
+
+    /* Minimal reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #e6eef8;
+      background: linear-gradient(180deg,var(--bg-start) 0%, var(--bg-end) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+
+    /* Layout */
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:1.5rem;
+    }
+
+    /* Full-screen hero */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      padding:2rem 1rem;
+      overflow:hidden;
+    }
+
+    /* soft diagonal overlay */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(96,165,250,0.06) 0%, rgba(110,231,183,0.04) 40%, transparent 60%);
+      pointer-events:none;
+    }
+
+    .card{
+      width:100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.04);
+      padding:2rem;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1.25rem;
+      align-items:center;
+    }
+
+    .hero-inner{
+      display:flex;
+      gap:2rem;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      flex-wrap:wrap;
+    }
+
+    .left{
+      flex:1 1 420px;
+      min-width:260px;
+    }
+
+    .right{
+      flex:0 0 280px;
+      min-width:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    h1{
+      margin:0 0 .25rem 0;
+      font-size:clamp(2rem, 4.5vw, 3.25rem);
+      line-height:1.02;
+      letter-spacing:-0.01em;
+      font-weight:700;
+      color: white;
+      text-wrap:balance;
+    }
+
+    p.tag{
+      margin:0 0 1.25rem 0;
+      color: #cfe8ff;
+      opacity:0.95;
+      font-size:clamp(1rem, 1.6vw, 1.125rem);
+    }
+
+    .cta-row{
+      display:flex;
+      gap:0.75rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.6rem;
+      padding:0.78rem 1.1rem;
+      border-radius:12px;
+      background: linear-gradient(90deg,var(--accent-1), var(--accent-2));
+      color: #04263b;
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(6,18,36,0.45);
+      transition:transform .14s ease, box-shadow .14s ease;
+      text-decoration:none;
+    }
+
+    .btn:hover{ transform: translateY(-3px); box-shadow:0 10px 30px rgba(6,18,36,0.55) }
+    .btn:active{ transform: translateY(-1px) }
+
+    .secondary{
+      background:transparent;
+      color: #bcd7ff;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:0.6rem 0.9rem;
+      border-radius:10px;
+      font-weight:500;
+    }
+
+    /* small visual card on right */
+    .profile-card{
+      width:220px;
+      background:var(--card);
+      border-radius:14px;
+      padding:12px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .avatar{
+      width:86px;
+      height:86px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--accent-1), var(--accent-2));
+      margin:0 auto 0.75rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#05202a;
+      font-weight:700;
+      font-size:1.6rem;
+      box-shadow: 0 6px 18px rgba(6,18,36,0.4);
+    }
+
+    .profile-name{ font-weight:700; margin:0; color:#e9f7ff }
+    .profile-role{ margin:0; font-size:0.92rem; color:#bcd7ff; opacity:0.9 }
+
+    /* contact section */
+    #contact{
+      padding:3rem 1rem;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    }
+    .contact-inner{
+      max-width:700px;
+      margin:0 auto;
+      background:rgba(255,255,255,0.01);
+      border-radius:12px;
+      padding:1.2rem;
+      border:1px solid rgba(255,255,255,0.02);
+      text-align:center;
+    }
+
+    label{display:block; text-align:left; font-size:0.9rem; color:#dbeeff; margin-bottom:0.35rem}
+    input, textarea{
+      width:100%;
+      padding:0.8rem;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.04);
+      background:rgba(0,0,0,0.25);
+      color:#eaf6ff;
+      margin-bottom:0.9rem;
+      font-size:0.95rem;
+    }
+
+    input::placeholder, textarea::placeholder{ color: rgba(230,240,255,0.45) }
+
+    footer{
+      padding:1rem;
+      text-align:center;
+      color:#a9c9ff;
+      opacity:0.9;
+      font-size:0.88rem;
+    }
+
+    /* small screens */
+    @media (max-width:720px){
+      .right{ order:2; }
+      .left{ order:1; }
+      .hero-inner{ gap:1rem }
+      .card{ padding:1.25rem }
+      .profile-card{ width:100%; display:flex; gap:0.75rem; align-items:center; justify-content:flex-start; padding:10px }
+      .avatar{ width:64px; height:64px; font-size:1.15rem }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="hero" role="main" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="card hero-inner" role="region" aria-label="Hero">
+        <div class="left">
+          <h1 id="hero-title">Your Name</h1>
+          <p class="tag">Designer • Product thinker • Building simple, useful digital experiences</p>
+
+          <div class="cta-row" role="navigation" aria-label="Primary actions">
+            <!-- Contact button uses mailto as example; replace with form link or smooth-scroll -->
+            <a class="btn" href="#contact" title="Contact me" role="button">Contact Me</a>
+
+            <!-- Secondary action (download resume / view work) -->
+            <a class="secondary" href="#" title="View my work">View Portfolio</a>
+          </div>
+
+          <!-- subtle micro bio -->
+          <p style="margin-top:1.1rem; color:#cfe8ff; opacity:0.9; font-size:0.95rem">
+            I design product interfaces and rapid prototypes for web and mobile. Currently exploring AI-assisted design workflows and delightful micro-interactions.
+          </p>
+        </div>
+
+        <aside class="right" aria-label="Profile card">
+          <div class="profile-card" role="group" aria-labelledby="profile-name">
+            <div class="avatar" aria-hidden="true">YN</div>
+            <div>
+              <p id="profile-name" class="profile-name">Your Name</p>
+              <p class="profile-role">Interaction Designer</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Contact section -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="container contact-inner">
+      <h2 id="contact-title" style="margin-top:0; color:#ffffff">Get in touch</h2>
+      <p style="margin:0 0 1rem 0; color:#cfe8ff">Prefer email? <strong><a href="mailto:you@example.com" style="color:inherit; text-decoration:underline">you@example.com</a></strong></p>
+
+      <!-- Simple contact form (non-functional without backend) -->
+      <form onsubmit="event.preventDefault(); handleContactSubmission();">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="jane@domain.com" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+
+        <div style="display:flex; justify-content:center;">
+          <button class="btn" type="submit" aria-label="Send message">Send Message</button>
+        </div>
+        <p id="contact-feedback" style="margin-top:.8rem; color:#bcd7ff; display:none"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Your Name — Built with ❤️ & a little CSS
+  </footer>
+
+  <script>
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function handleContactSubmission(){
+      // Demo behavior: show a success message. Replace with real submission to backend/API.
+      const feedback = document.getElementById('contact-feedback');
+      feedback.textContent = 'Thanks! Your message has been prepared — in a real site this would send to an email or backend.';
+      feedback.style.display = 'block';
+    }
+
+    // smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
